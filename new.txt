@@ -2,6 +2,4 @@ git add-A //добавить все файлы
 git status
 .git/worktrees/*/index.lock//если не добавляется
 git commit -a -m"first"
-git remote add origin https://github.com/Kovalenkosteam/user-DB.git
-git branch -M main
 git push -u origin main
