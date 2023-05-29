@@ -1,5 +1,5 @@
-git add-A //добавить все файлы
 git status
+git add-A //добавить все файлы
 .git/worktrees/*/index.lock//если не добавляется
-git commit -a -m"first"
+git commit -m"first"
 git push -u origin main
