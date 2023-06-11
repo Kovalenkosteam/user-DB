@@ -44,29 +44,46 @@ const movieDB = {
         'Скотт Пилигрим против...'
     ]
 };
-const promo__adv = document.querySelectorAll('.promo__adv img');
-const promo__bg = document.querySelector('.promo__bg');
-let promo__genre = promo__bg.querySelector('.promo__genre');
-const list = document.querySelector('.promo__interactive-list');
-const confirm= document.querySelector('button');
-const input=document.querySelector('.adding__input');
-promo__adv.forEach(i => {
-    i.remove();
+const adv = document.querySelectorAll('.promo__adv img');
+const poster = document.querySelector('.promo__bg');
+let genre = poster.querySelector('.promo__genre');
+const movieList = document.querySelector('.promo__interactive-list');
+const addForm = document.querySelector('form.add');
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    addForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+    });
+
+
+    adv.forEach(i => {
+        i.remove();
+    });
+
+
+    genre.textContent = 'Драма';
+    poster.style.backgroundImage = 'url(./img/bg.jpg)';
+
+
+    movieList.innerHTML = '';
+    movieDB.movies.sort();
+
+
+    movieDB.movies.forEach((film, i) => {
+        movieList.innerHTML += `
+        <li class="promo__interactive-item">${i + 1} ${film}
+        <div class="delete"></div>
+        </li>`;
+    });
+
+
 });
-promo__genre.textContent = 'Драма';
-promo__bg.style.backgroundImage = 'url(./img/bg.jpg)';
-list.innerHTML = '';
-movieDB.movies.sort();
-movieDB.movies.forEach((film, i) => {
-    list.innerHTML += `
-    <li class="promo__interactive-item">${i + 1} ${film}
-    <div class="delete"></div>
-    </li>`;
-});
-console.log(confirm);
-confirm.addEventListener('click', () => {
-    movieDB.movies.push(input); 
-},{once:true});
+
+
+
+
+
 
 console.log(movieDB.movies);
 
