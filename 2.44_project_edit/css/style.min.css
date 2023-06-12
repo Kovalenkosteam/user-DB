@@ -6,6 +6,7 @@
     font-family: 'Roboto', sans-serif
 }
 
+
 .header {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -220,7 +221,8 @@
     color: #000000;
     margin-bottom: 15px;
     padding-right: 40px;
-    text-transform: uppercase
+    text-transform: uppercase;
+    
 }
 
 .promo__interactive-item span {
@@ -354,3 +356,4 @@
 }
 
 /*# sourceMappingURL=style.min.css.map */
+

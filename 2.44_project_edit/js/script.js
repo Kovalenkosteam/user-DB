@@ -35,58 +35,177 @@ P.S. Здесь есть несколько вариантов решения з
 
 'use strict';
 
-const movieDB = {
-    movies: [
-        'Логан',
-        'Лига справедливости',
-        'Ла-ла лэнд',
-        'Одержимость',
-        'Скотт Пилигрим против...'
-    ]
-};
-const adv = document.querySelectorAll('.promo__adv img');
-const poster = document.querySelector('.promo__bg');
-let genre = poster.querySelector('.promo__genre');
-const movieList = document.querySelector('.promo__interactive-list');
-const addForm = document.querySelector('form.add');
+
+
+/* // document.addEventListener('DOMContentLoaded', () => {
+
+
+    //     const movieDB = {
+    //         movies: [
+    //             'Логан',
+    //             'Лига справедливости',
+    //             'Ла-ла лэнд',
+    //             'Одержимость',
+    //             'Скотт Пилигрим против...'
+    //         ]
+    //     };
+    
+    
+    //     const adv = document.querySelectorAll('.promo__adv img');
+    //     const poster = document.querySelector('.promo__bg');
+    //     let genre = poster.querySelector('.promo__genre');
+    //     const movieList = document.querySelector('.promo__interactive-list');
+    //     const addForm = document.querySelector('form.add');
+    //     const addInput = addForm.querySelector('.adding__input');
+    //     const checkbox = addForm.querySelector('[type="checkbox"]');
+    
+    
+    //     addForm.addEventListener('submit', (event) => {
+    //         event.preventDefault();
+    //         let newFilm = addInput.value;
+    //         const favorite = checkbox.checked;
+    
+    //         if(newFilm){
+    //             if(newFilm.length>21){
+    //                 newFilm=`${newFilm.substring(0,22)}...`;
+    //             }
+    //             if (favorite){
+    //                 console.log('abkmv');
+    //             }
+    //             movieDB.movies.push(newFilm);
+    //             sortArr(movieDB.movies);
+    //             createMovieList(movieDB.movies, movieList);
+    //         }
+    
+    //         event.target.reset();
+    //     });
+    
+    
+    //     const deleteAdv = (arr) => {
+    //         arr.forEach(item => {
+    //             item.remove();
+    //         });
+    //     };
+    
+    
+    //     const makeChanges = () => {
+    //         genre.textContent = 'Драма';
+    //         poster.style.backgroundImage = 'url(./img/bg.jpg)';
+    //     };
+    
+    
+    //     const sortArr = (arr) => {
+    //         arr.sort();
+    //     };
+    
+    
+    //     function createMovieList(films, parent) {
+    //         parent.innerHTML = '';
+    //         sortArr(films);
+    //         films.forEach((film, i) => {
+    //             parent.innerHTML += `
+    //             <li class="promo__interactive-item">${i + 1} ${film}
+    //             <div class="delete"></div>
+    //             </li>
+    //             `;
+    //         });
+    
+    //         document.querySelectorAll('.delete').forEach((btn,i)=>{
+    //             btn.addEventListener('click',()=>{
+    //                 btn.parentElement.remove();
+    //                 movieDB.movies.splice(i,1);
+    //                 createMovieList(films, parent);
+    //             });
+    //         });
+    
+    //     }
+    
+    
+    //     deleteAdv(adv);
+    //     makeChanges();
+    //     createMovieList(movieDB.movies, movieList);
+    // }); */
+
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    const movieDB = {
+        movies: [
+            'Логан',
+            'Лига справедливости',
+            'Ла-ла лэнд',
+            'Одержимость',
+            'Скотт Пилигрим против...'
+        ]
+    };
+
+
+    const adv = document.querySelectorAll('.promo__adv img');
+    const poster = document.querySelector('.promo__bg');
+    const genre = poster.querySelector('.promo__genre');
+    const movieList = document.querySelector('.promo__interactive-list');
+    const addForm = document.querySelector('form.add');
+    const input = addForm.querySelector('.adding__input');
     
+    movieDB.movies=(movieDB.movies.join(',').toUpperCase()).split(',');
+
+
     addForm.addEventListener('submit', (event) => {
         event.preventDefault();
+        if(input.value.trim()==''){
+            addForm.reset();
+        }else{
+            movieDB.movies.push(input.value.trim().toUpperCase());
+            addList();
+            const checkbox = document.querySelector('[type="checkbox"]');
+            if (checkbox.checked) {
+                console.log('Мой любимый фильм');
+            }
+            addForm.reset();
+        }
+        
     });
 
 
-    adv.forEach(i => {
-        i.remove();
-    });
+    function addRemove() {
+        adv.forEach(i => {
+            i.remove();
+        });
+    }
+
+    function genreStyle() {
+        genre.textContent = 'Драма';
+        poster.style.backgroundImage = 'url(./img/bg.jpg)';
+    }
 
 
-    genre.textContent = 'Драма';
-    poster.style.backgroundImage = 'url(./img/bg.jpg)';
+    function addList() {
+        movieList.innerHTML = '';
+        movieDB.movies.sort();
+        movieDB.movies.forEach((film, i) => {
+            if (film.length > 21) {
+                film = film.slice(0, 21) + '...';
+            }
+            
+            movieList.innerHTML += `
+                <li class="promo__interactive-item">${i + 1} ${film}
+                <div class="delete"></div>
+                </li>
+            `;
+        });
+
+        document.querySelectorAll('.delete').forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.remove();
+                movieDB.movies.splice(i, 1);
+                addList();
+            });
+        });
+    }
 
 
-    movieList.innerHTML = '';
-    movieDB.movies.sort();
-
-
-    movieDB.movies.forEach((film, i) => {
-        movieList.innerHTML += `
-        <li class="promo__interactive-item">${i + 1} ${film}
-        <div class="delete"></div>
-        </li>`;
-    });
-
+    addRemove();
+    genreStyle();
+    addList();
 
 });
-
-
-
-
-
-
-console.log(movieDB.movies);
-
-
-
-
