@@ -1,5 +1,9 @@
 body {
+<<<<<<< HEAD
     height: 1000px;
+=======
+    height: 500px;
+>>>>>>> fc4a4e2 (2.49_event_on_mobile)
 }
 .box {
     width: 150px;
