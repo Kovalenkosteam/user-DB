@@ -77,3 +77,4 @@ function deepCount(a){
         }
         return sum;
 }
+console.log(deepCount([1, 2, [3, 4, [5]]]));
