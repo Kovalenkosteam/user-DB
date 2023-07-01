@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		tabs[i].classList.add('tabheader__item_active');
 	}
 
-
 	hideTabContent();
 	showTabContent();
 
@@ -37,7 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	//Timer
+
 	const deadline = '2023-09-25';
+
 	function getTimeRemaining(endTime) {
 		let days, hours, minutes, seconds;
 		const t = Date.parse(endTime) - Date.parse(new Date());
@@ -62,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 	}
 
-
 	function getZero(num) {
 		if (num >= 0 && num < 10) {
 			return `0${num}`;
@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-
 	function setClock(selector, endTime) {
 		const timer = document.querySelector(selector);
 		const days = timer.querySelector('#days');
@@ -79,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		const minutes = timer.querySelector('#minutes');
 		const seconds = timer.querySelector('#seconds');
 		const timeInterval = setInterval(updateClock, 1000);
-
 
 		updateClock();
 		function updateClock() {
@@ -94,6 +92,68 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 	setClock('.timer', deadline);
+
+
+	//Modal
+
+	const modalTrigger = document.querySelectorAll('[data-modal]');
+	const modalCloseBtn = document.querySelector('[data-close');
+	const modal = document.querySelector('.modal');
+	const modalDialogue = document.querySelector('.modal__dialog');
+
+	modalTrigger.forEach((item) => {
+		item.addEventListener('click', () => {
+			// modal.style.display = 'block';
+			modal.classList.add('show');
+			modal.classList.remove('hide');
+			document.body.style.overflow = 'hidden';
+		});
+	});
+
+	function closeModal() {
+		modal.classList.add('hide');
+		modal.classList.remove('show');
+		document.body.style.overflow = '';
+	}
+
+	modal.addEventListener('click', (event) => {
+		if (event.target === modal) {
+			closeModal();
+		}
+	});
+
+	modalCloseBtn.addEventListener('click', closeModal);
+
+	document.addEventListener('keydown', (event)=>{
+		if (event.code==='Escape'&& modal.classList.contains('show')){
+			closeModal();
+		}
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
 
